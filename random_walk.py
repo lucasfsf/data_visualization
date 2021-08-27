@@ -5,7 +5,7 @@ class RandomWalk:
 
     def __init__(self, num_points=5000) -> None:
         """Initialize attributes of a walk"""
-        self.num_ponts = num_points
+        self.num_points = num_points
         
         # All walks start at (0, 0)
         self.x_values = [0]
@@ -15,7 +15,7 @@ class RandomWalk:
         """Calculate all the points in the walk."""
 
         # Keep taking step until the walk reaches the desired length.
-        while len(self.x_values) < self.num_ponts:
+        while len(self.x_values) < self.num_points:
 
             # Decide which direction to go and how far to go in that direction.
             x_direction = choice([1, -1])
