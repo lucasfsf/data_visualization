@@ -8,20 +8,16 @@ die_1 = Die()
 die_2 = Die(10)
 
 # Make some rolls, and store results in a list.
-results = []
-for roll_num in range(50_000):
-    result = die_1.roll() + die_2.roll()
-    results.append(result)
+results = [die_1.roll() + die_2.roll() for roll in range(50_000)]
 
 # Analyze the results.
-frequencies = []
 max_result = die_1.num_sides + die_2.num_sides
-for value in range(2, max_result+1):
-    frequency = results.count(value)
-    frequencies.append(frequency)
+range_of_results = range(2, max_result+1)
+frequencies = [results.count(value) for value in range_of_results]
+
 
 # Visualize the results.
-x_values = list(range(2, max_result+1))
+x_values = list(range_of_results)
 data = [Bar(x=x_values, y=frequencies)]
 
 x_axis_config = {'title': 'Result', 'dtick': 1}
