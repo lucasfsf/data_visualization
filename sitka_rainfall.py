@@ -14,10 +14,16 @@ with open(filename) as f:
     # Getting index of PRCP and DATE
     date_index = header_row.index("DATE")
     precipitation_index = header_row.index("PRCP")
+    station_name_index = header_row.index("NAME")
 
-    # Get dates and rain from this file.
+    # Create a variable to store the station name from the fisrt row in data
+    station_name = None
+    
+    # Get dates, and high and low temperatures from this file.
     dates, rains = [], []
     for row in reader:
+        if station_name == None:
+            station_name = row[station_name_index]
         try:
             current_date = datetime.strptime(row[date_index], '%Y-%m-%d')
             current_rain = float(row[precipitation_index])
@@ -33,7 +39,7 @@ fig, ax = plt.subplots()
 ax.plot(dates, rains, c='blue')
 
 # Format Plot
-ax.set_title('Precipitation in Sitka - 2018', fontsize=24)
+ax.set_title(f"Precipitation 2018 - \n {station_name} ", fontsize=20)
 ax.set_xlabel('', fontsize=16)
 fig.autofmt_xdate()
 ax.set_ylabel("Precipitation", fontsize=16)
