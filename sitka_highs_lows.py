@@ -7,13 +7,17 @@ filename = 'data/sitka_weather_2018_simple.csv'
 with open(filename) as f:
     reader = csv.reader(f)
     header_row = next(reader)
+    # Getting index of TMAX, TMIN and DATE
+    tmax_index = header_row.index("TMAX")
+    tmin_index = header_row.index("TMIN")
+    date_index = header_row.index("DATE")
     
     # Get dates, and high and low temperatures from this file.
     dates, highs, lows = [], [], []
     for row in reader:
-        current_date = datetime.strptime(row[2], '%Y-%m-%d')
-        high = int(row[5])
-        low = int(row[6])
+        current_date = datetime.strptime(row[date_index], '%Y-%m-%d')
+        high = int(row[tmax_index])
+        low = int(row[tmin_index])
         dates.append(current_date)
         highs.append(high)
         lows.append(low)

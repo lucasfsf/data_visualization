@@ -10,13 +10,17 @@ filename = 'data/sitka_weather_2018_simple.csv'
 with open(filename) as f:
     reader = csv.reader(f)
     header_row = next(reader)
-    print(header_row)
+
+    # Getting index of PRCP and DATE
+    date_index = header_row.index("DATE")
+    precipitation_index = header_row.index("PRCP")
+
     # Get dates and rain from this file.
     dates, rains = [], []
     for row in reader:
         try:
-            current_date = datetime.strptime(row[2], '%Y-%m-%d')
-            current_rain = float(row[3])
+            current_date = datetime.strptime(row[date_index], '%Y-%m-%d')
+            current_rain = float(row[precipitation_index])
         except ValueError:
             print(f"Missing value at {current_date}")
         else:
